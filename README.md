@@ -20,7 +20,7 @@ All quotes are from [Clean code](https://www.goodreads.com/work/quotes/3779106-c
 - [Wiki: Programmation spaghetti](https://fr.wikipedia.org/wiki/Programmation_spaghetti)
 - [Wiki: Couplage (informatique](https://fr.wikipedia.org/wiki/Couplage_(informatique))
 
-#### Clair
+#### Code lisible
 
 > "It is not the language that makes programs appear simple. It is the programmer that make the language appear simple!"  
 > "Clean code is simple and direct. Clean code reads like well-written prose"
@@ -33,13 +33,45 @@ Code propre :
 - modulaire
 - 1 fonction -> 1 action
 
+Si vous avez dans votre programme plusieurs passages qui font la même chose, alors il faut en faire une fonction.
+
 #### Bien nommer
 
 > "A long descriptive name is better than a long descriptive comment."
 
 - [Naming cheatsheet](https://github.com/kettanaito/naming-cheatsheet)
 
-#### Flowcharts
+Si vous ne savez pas comment nommer votre fonction ou votre variable, c'est que vous ne savez pas à quoi elle sert.
+
+À éviter :
+- les noms pas clairs comme : n1, n2, n3
+- les noms trop abrégés : env_cpy -> ecpy
+- mix de mots Français-Anglais
+
+Choisir son format et s'y tenir : camelCase, snake_case, etc. Mais aussi comment on va par exemple nommer ses fonctions.
+
+**Exemples**
+
+Pour les actions, j'aime bien nommer mes fonctions ainsi : `verbe_objet`
+- `start_shell()`
+- `trace_ray_to_objs()`
+- `get_word()`
+
+Pour les true/false : `objet_is_adjectif` ou `is_adjectif`
+- `stack_is_full()`
+- `stack_is_empty()`
+- `input_is_valid()`
+
+Cela clarifie la lecture :
+```
+if (stack_is_full(stack))
+    increase_stack(stack)
+```
+On comprend en lisant que si la pile est pleine, alors on augmente sa capacité.
+
+#### Méthodologie
+
+D'abord se documenter, voire dessiner son programme, écrire des petits tests si besoin. Savoir vers ce quoi on va même si ça va changer. Cela va aussi permettre d'écrire le début des tests.
 
 - [Flowchart In Programming](https://www.programiz.com/article/flowchart-programming)
 - Flowcharts: [app.diagrams.net](https://app.diagrams.net/)
