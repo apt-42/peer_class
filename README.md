@@ -35,6 +35,8 @@ Code propre :
 
 Si vous avez dans votre programme plusieurs passages qui font la même chose, alors il faut en faire une fonction.
 
+Quelques termes clés : modulaire, monolithe, microservice, refactoring
+
 #### Bien nommer
 
 > "A long descriptive name is better than a long descriptive comment."
