@@ -18,7 +18,7 @@ All quotes are from [Clean code](https://www.goodreads.com/work/quotes/3779106-c
 
 - [Wiki: Syndrome du plat de spaghettis](https://fr.wikipedia.org/wiki/Syndrome_du_plat_de_spaghettis)
 - [Wiki: Programmation spaghetti](https://fr.wikipedia.org/wiki/Programmation_spaghetti)
-- [Wiki: Couplage (informatique](https://fr.wikipedia.org/wiki/Couplage_(informatique))
+- [Wiki: Couplage (informatique)](https://fr.wikipedia.org/wiki/Couplage_(informatique))
 
 #### Code lisible
 
@@ -50,12 +50,17 @@ Si vous ne savez pas comment nommer votre fonction ou votre variable, c'est que 
 
 Choisir son format et s'y tenir : camelCase, snake_case, etc. Mais aussi comment on va par exemple nommer ses fonctions.
 
-**Exemples**
+**Exemples personnels et pour le C**
 
 Pour les actions, j'aime bien nommer mes fonctions ainsi : `verbe_objet`
 - `start_shell()`
 - `trace_ray_to_objs()`
 - `get_word()`
+
+On peut faire aussi l'inverse : `objet_verbe`
+- `str_len()`
+- `str_dup()`
+- `stack_increase()`
 
 Pour les true/false : `objet_is_adjectif` ou `is_adjectif`
 - `stack_is_full()`
@@ -68,6 +73,17 @@ if (stack_is_full(stack))
     increase_stack(stack)
 ```
 On comprend en lisant que si la pile est pleine, alors on augmente sa capacité.
+
+#### Bien ranger
+
+Séparer les .h, les .c et si possible les .o dans différents dossiers.
+
+Utiliser un fichier `.gitignore` afin de ne pas push les .o, les exécutables et d'autres fichiers pas utiles au projet comme `.DS_Store`.
+
+Dans un fichier C :
+- 1 fonction principale
+- ses auxiliaires (en statique en général) qui sont rarement appelées dans d'autres fichiers
+- les fonctions dans un fichier font une seule chose et travaillent ensemble
 
 #### Méthodologie
 
