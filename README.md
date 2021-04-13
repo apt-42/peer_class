@@ -52,6 +52,8 @@ Si vous ne savez pas comment nommer votre fonction ou votre variable, c'est que 
 
 Choisir son format et s'y tenir : camelCase, snake_case, etc. Mais aussi comment on va par exemple nommer ses fonctions.
 
+Ne pas hésiter à faire des `define`.
+
 **Exemples personnels et pour le C**
 
 Pour les actions, j'aime bien nommer mes fonctions ainsi : `verbe_objet`
@@ -87,9 +89,13 @@ Dans un fichier C :
 - ses auxiliaires (en statique en général) qui sont rarement appelées dans d'autres fichiers
 - les fonctions dans un fichier font une seule chose et travaillent ensemble
 
+Bien nommer ses fichiers C. Si besoin, créer des subdirs.
+
+Exemple : si en évaluation, vous ne savez pas où retrouver une fonction, c'est que c'est mal rangé.
+
 #### Méthodologie
 
-D'abord se documenter, voire dessiner son programme, écrire des petits tests si besoin. Savoir vers ce quoi on va même si ça va changer. Cela va aussi permettre d'écrire le début des tests.
+D'abord se documenter, voire dessiner son programme, écrire des petits tests si besoin (exemple : des tests avec la mlx pour cub3D/miniRT). Savoir vers ce quoi on va même si le code va changer. Cette démarche va aussi permettre d'écrire le début des tests.
 
 - [Flowchart In Programming](https://www.programiz.com/article/flowchart-programming)
 - Flowcharts: [app.diagrams.net](https://app.diagrams.net/)
