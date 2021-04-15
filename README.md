@@ -10,7 +10,7 @@
 
 All quotes are from [Clean code](https://www.goodreads.com/work/quotes/3779106-clean-code-a-handbook-of-agile-software-craftsmanship-robert-c-martin).
 
-#### Des spaghettis
+### Des spaghettis
 
 <p align="center">
   <img src="assets/Cablespaghetti2.jpg" alt="spaghetti" />
@@ -20,7 +20,9 @@ All quotes are from [Clean code](https://www.goodreads.com/work/quotes/3779106-c
 - [Wiki: Programmation spaghetti](https://fr.wikipedia.org/wiki/Programmation_spaghetti)
 - [Wiki: Couplage (informatique)](https://fr.wikipedia.org/wiki/Couplage_(informatique))
 
-#### Code lisible
+-> Code spaghetti == Pas lisible
+
+### Code lisible
 
 > "It is not the language that makes programs appear simple. It is the programmer that make the language appear simple!"  
 > "Clean code is simple and direct. Clean code reads like well-written prose"
@@ -33,11 +35,19 @@ Code propre :
 - modulaire
 - 1 fonction -> 1 action
 
-Si vous avez dans votre programme plusieurs passages qui font la même chose, alors il faut en faire une fonction.
+Si vous avez dans votre programme plusieurs passages qui font la même chose (voire, un passage que vous avez copié-collé à plusieurs endroits), alors il faut en faire une fonction.
 
-Quelques termes clés : modulaire, monolithe, microservice, refactoring
+Pas bien : les fonctions super longues qui font beaucoup trop d'actions.
 
-#### Bien nommer
+Quelques termes clés : modulaire, monolithe, microservice, refactoring.
+
+Exemples :
+
+- https://gist.github.com/davidzchen/9187984
+- https://github.com/raspberrypi/linux/blob/rpi-5.4.y/fs/9p/acl.c
+- https://github.com/microsoft/WSL2-Linux-Kernel/blob/master/net/ipv4/arp.c (pour ce dernier exemple, on a par ex une variable nommée `dont_send` ligne 824, qui est un nom explicite)
+
+### Bien nommer
 
 > "A long descriptive name is better than a long descriptive comment."
 
@@ -45,23 +55,35 @@ Quelques termes clés : modulaire, monolithe, microservice, refactoring
 
 Si vous ne savez pas comment nommer votre fonction ou votre variable, c'est que vous ne savez pas à quoi elle sert.
 
-À éviter :
+Pas bien :
+
 - les noms pas clairs comme : n1, n2, n3
 - les noms trop abrégés : env_cpy -> ecpy
 - mix de mots Français-Anglais
 
-Choisir son format et s'y tenir : camelCase, snake_case, etc. Mais aussi comment on va par exemple nommer ses fonctions.
+Choisir son format et s'y tenir : camelCase, snake_case, etc. Mais aussi comment on va par exemple nommer ses fonctions, ou aussi `if (!foo)` vs `if (foo == NULL)`. 
+En bref, se tenir à un format facilite la lecture.
 
-Ne pas hésiter à faire des `define`.
+Ne pas hésiter à faire des `define`. Il devrait y avoir le minimum de valeurs "en dur" dans le code. Les `define` permettent aussi de comprendre le programme quand on ne l'a jamais vu ou que l'on ne s'en souvient plus très bien.
+
+Exemple : Quelques mois après avoir rendu miniRT et minishell, vais-je me souvenir à quoi correspond ce `96`, ce `39.375` ou ce `256` ? Peut-être pas. Alors :
+
+```c
+#define DEFAULT_DPI 96
+#define PPM_CONV_FACTOR 39.375
+#define MAX_STATES 256
+```
 
 **Exemples personnels et pour le C**
+
+Ce sont des exemples personnels, vous gérez comme vous le sentez.
 
 Pour les actions, j'aime bien nommer mes fonctions ainsi : `verbe_objet`
 - `start_shell()`
 - `trace_ray_to_objs()`
 - `get_word()`
 
-On peut faire aussi l'inverse : `objet_verbe`
+On peut faire aussi l'inverse : `objet_verbe` ou `objet_résultat`
 - `str_len()`
 - `str_dup()`
 - `stack_increase()`
@@ -72,13 +94,13 @@ Pour les true/false : `objet_is_adjectif` ou `is_adjectif`
 - `input_is_valid()`
 
 Cela clarifie la lecture :
-```
+```c
 if (stack_is_full(stack))
     increase_stack(stack)
 ```
 On comprend en lisant que si la pile est pleine, alors on augmente sa capacité.
 
-#### Bien ranger
+### Bien ranger
 
 Séparer les .h, les .c et si possible les .o dans différents dossiers.
 
@@ -89,18 +111,21 @@ Dans un fichier C :
 - ses auxiliaires (en statique en général) qui sont rarement appelées dans d'autres fichiers
 - les fonctions dans un fichier font une seule chose et travaillent ensemble
 
-Bien nommer ses fichiers C. Si besoin, créer des subdirs.
+Bien nommer ses fichiers C. Si besoin, créer des subdirs.  
+Ce n'est pas obligatoire de split les .h mais c'est mieux surtout pour les plus gros projets et ça permet de réutiliser des parties d'un projet à l'autre.
 
 Exemple : si en évaluation, vous ne savez pas où retrouver une fonction, c'est que c'est mal rangé.
 
-#### Méthodologie
+Pas bien : les fichiers C avec 20 000 fonctions dedans de 42 000 lignes de long.
+
+### Méthodologie
 
 D'abord se documenter, voire dessiner son programme, écrire des petits tests si besoin (exemple : des tests avec la mlx pour cub3D/miniRT). Savoir vers ce quoi on va même si le code va changer. Cette démarche va aussi permettre d'écrire le début des tests.
 
 - [Flowchart In Programming](https://www.programiz.com/article/flowchart-programming)
 - Flowcharts: [app.diagrams.net](https://app.diagrams.net/)
 
-#### Tester
+### Tester
 
 > "It is unit tests that keep our code flexible, maintainable, and reusable. The reason is simple. If you have tests, you do not fear making changes to the code! Without tests every change is a possible bug."
 
@@ -116,3 +141,51 @@ Faites vos propres tests et automatisez-les (Github Actions, Circle CI, Travis C
 Il faut écrire les tests avant le programme en y allant petit à petit.
 
 - [Unit testing with asserts](http://www.electronvector.com/blog/unit-testing-with-asserts)
+
+## Secure coding
+
+- [Guide ANSSI programmation en C](https://www.ssi.gouv.fr/guide/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c/)
+- [Secure Coding in C and C++](https://www.pearson.com/us/higher-education/program/Seacord-Secure-Coding-in-C-and-C-2nd-Edition/PGM142190.html)
+
+### Malloc
+
+Quand on alloue, c'est mieux de set ensuite à zéro avec notamment bzero ou memset (utiliser ft_strnew() et ft_memalloc() par exemple).  
+Quand on libère la mémoire, c'est mieux de set ensuite le pointeur à NULL (utiliser ft_strdel() et ft_memdel() par exemple).  
+On ne cast normalement pas les malloc.
+
+Il faut bien set à NULL les variables au départ.
+
+Pas bien :
+```c
+char *str;
+
+if ( ! (str = (char *)malloc(sizeof(char) * strlen(str)) ) )
+{
+    perror("malloc failed");
+    return (-1);
+}
+```
+
+Bien :
+```c
+char *str = NULL;
+
+str = malloc(sizeof(char) * strlen(str));
+if (str == NULL)
+{
+    perror("malloc failed");
+    return (-1);
+}
+```
+
+Bien :
+```c
+char *str = NULL;
+
+str = ft_strnew(ft_strlen(str));
+if (str == NULL)
+{
+    perror("malloc failed");
+    return (-1);
+}
+```
