@@ -172,11 +172,11 @@ st_cur = malloc( sizeof( struct FT_CUSTOM ) );
 
 /* If the malloc succeeded it will have returned a valid 
  * pointer to some part of the heap, otherwise it returns 
- * NULL so we check for NULL here. /
+ * NULL so we check for NULL here. */
 if (st_cur == NULL) { 
-    / Print a relevant error message to stderr. /
+    /* Print a relevant error message to stderr. */
     perror("malloc failed"); 
-    / Return a non-zero value to indicate that something failed. */
+    /* Return a non-zero value to indicate that something failed. */
     return(1); 
 }
 ```
