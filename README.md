@@ -157,35 +157,26 @@ Il faut bien set à NULL les variables au départ.
 
 Pas bien :
 ```c
-char *str;
-
-if ( ! (str = (char *)malloc(sizeof(char) * strlen(str)) ) )
-{
-    perror("malloc failed");
-    return (-1);
-}
+if( ! ( st_cur = (struct FT_CUSTOM *) malloc(sizeof( struct FT_CUSTOM ) ) ) )
+    {
+        perror( "malloc failed" );
+        return( 1 );
+    }
 ```
 
 Bien :
 ```c
-char *str = NULL;
+struct FT_CUSTOM * st_cur = NULL;
 
-str = malloc(sizeof(char) * strlen(str));
-if (str == NULL)
-{
-    perror("malloc failed");
-    return (-1);
-}
-```
+st_cur = malloc( sizeof( struct FT_CUSTOM ) ); 
 
-Bien :
-```c
-char *str = NULL;
-
-str = ft_strnew(ft_strlen(str));
-if (str == NULL)
-{
-    perror("malloc failed");
-    return (-1);
+/* If the malloc succeeded it will have returned a valid 
+ * pointer to some part of the heap, otherwise it returns 
+ * NULL so we check for NULL here. /
+if (st_cur == NULL) { 
+    / Print a relevant error message to stderr. /
+    perror("malloc failed"); 
+    / Return a non-zero value to indicate that something failed. */
+    return(1); 
 }
 ```
